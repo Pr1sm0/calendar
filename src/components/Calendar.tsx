@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas';
 import { Box, Button, TextField } from '@mui/material';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { format, getMonth, getYear } from 'date-fns';
-import { isArray, mergeWith, uniqBy } from 'lodash';
+import { debounce, isArray, mergeWith, uniqBy } from 'lodash';
 
 import Cell from './Cell';
 import { createDaysForCalendarView } from '../utils/dateHelpers';
@@ -163,13 +163,13 @@ const Calendar = (): ReactElement => {
     }
   };
 
-  const handleTaskSearchInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleTaskSearchInputChange = debounce((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setSearch({ ...search, tasks: e.target.value });
-  };
+  }, 500);
 
-  const handleLabelsSearchInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleLabelsSearchInputChange = debounce((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setSearch({ ...search, labels: e.target.value });
-  };
+  }, 500);
 
   const filteredTasks = (date: string) =>
     tasks[date]?.filter(({ text, labels }) => {
