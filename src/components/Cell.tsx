@@ -137,11 +137,11 @@ const Cell = ({ day, tasks, handleUpdateTasks }: IProps): ReactElement => {
                   day={day}
                   index={index}
                   handleUpdateTasks={handleUpdateTasks}
-                ></Task>
+                />
               );
             })}
+            {provided.placeholder}
           </Box>
-          {provided.placeholder}
         </Box>
       )}
     </Droppable>
