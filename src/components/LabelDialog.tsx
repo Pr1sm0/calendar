@@ -1,19 +1,16 @@
-import React, { ChangeEvent, ReactElement, useEffect } from 'react';
+import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react';
 
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 
 import { ColorsEnum } from '../utils/enums';
 import { ILabel } from '../utils/interfaces';
@@ -42,8 +39,8 @@ type IProps = {
 };
 
 const LabelDialog = ({ open, handleSubmit, onClose, editLabel = null }: IProps): ReactElement => {
-  const [labelColor, setLabelColor] = React.useState<string>(ColorsEnum.DARK_GREEN);
-  const [labelText, setLabelText] = React.useState<string>('');
+  const [labelColor, setLabelColor] = useState<string>(ColorsEnum.DARK_GREEN);
+  const [labelText, setLabelText] = useState<string>('');
 
   useEffect(() => {
     if (editLabel) {

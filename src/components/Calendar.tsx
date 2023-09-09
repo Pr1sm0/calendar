@@ -1,11 +1,17 @@
 import React, { ChangeEvent, ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 
 import axios from 'axios';
-import html2canvas from 'html2canvas';
-import { Box, Button, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import debounce from 'lodash/debounce';
+import format from 'date-fns/format';
+import getMonth from 'date-fns/getMonth';
+import getYear from 'date-fns/getYear';
+import isArray from 'lodash/isArray';
+import mergeWith from 'lodash/mergeWith';
+import TextField from '@mui/material/TextField';
+import uniqBy from 'lodash/uniqBy';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { format, getMonth, getYear } from 'date-fns';
-import { debounce, isArray, mergeWith, uniqBy } from 'lodash';
 
 import Cell from './Cell';
 import { createDaysForCalendarView } from '../utils/dateHelpers';
@@ -187,7 +193,8 @@ const Calendar = (): ReactElement => {
   const handleDownloadImage = async () => {
     const element = printRef.current;
     if (element) {
-      const canvas = await html2canvas(element);
+      const html2canvas = await import('html2canvas');
+      const canvas = await html2canvas.default(element);
       const data = canvas.toDataURL('image/jpg');
       const link = document.createElement('a');
       link.href = data;

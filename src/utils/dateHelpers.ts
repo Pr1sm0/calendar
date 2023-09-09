@@ -1,4 +1,10 @@
-import { endOfMonth, format, getDate, getDay, getDaysInMonth, isToday, startOfMonth } from 'date-fns';
+import endOfMonth from 'date-fns/endOfMonth';
+import format from 'date-fns/format';
+import getDate from 'date-fns/getDate';
+import getDay from 'date-fns/getDay';
+import getDaysInMonth from 'date-fns/getDaysInMonth';
+import isToday from 'date-fns/isToday';
+import startOfMonth from 'date-fns/startOfMonth';
 
 import { IDay, IHoliday } from './interfaces';
 

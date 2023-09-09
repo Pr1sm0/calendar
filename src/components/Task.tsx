@@ -1,12 +1,16 @@
-import React, { ChangeEvent, KeyboardEvent, ReactElement, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, lazy, ReactElement, Suspense, useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
-import { Box, IconButton, TextField, Tooltip } from '@mui/material';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import TextField from '@mui/material/TextField';
 import { Draggable } from 'react-beautiful-dnd';
 import { v4 } from 'uuid';
 
-import LabelDialog from './LabelDialog';
 import { IDay, ILabel, ITask } from '../utils/interfaces';
+
+const LabelDialog = lazy(() => import('./LabelDialog'));
+const Tooltip = lazy(() => import('@mui/material/Tooltip'));
 
 const classes = {
   task: {
@@ -42,8 +46,8 @@ type IProps = {
 const Task = ({ tasks, day, task, index, handleUpdateTasks }: IProps): ReactElement => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedField, setEditedField] = useState<ITask | null>(null);
-  const [isLabelModalOpen, setIsLabelModalOpen] = React.useState(false);
-  const [editLabelModalItem, setEditLabelModalItem] = React.useState<ILabel | null>(null);
+  const [isLabelModalOpen, setIsLabelModalOpen] = useState(false);
+  const [editLabelModalItem, setEditLabelModalItem] = useState<ILabel | null>(null);
 
   const handleLabelModalOpen = (task: ITask) => {
     setEditedField(task);
@@ -109,11 +113,13 @@ const Task = ({ tasks, day, task, index, handleUpdateTasks }: IProps): ReactElem
         {(provided) => (
           <Box ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} sx={classes.task}>
             <Box sx={classes.labelsWrapper}>
-              <Tooltip title="Add label">
-                <IconButton aria-label="add-label" size="small" onClick={() => handleLabelModalOpen(task)}>
-                  <AddIcon fontSize="small" />
-                </IconButton>
-              </Tooltip>
+              <Suspense fallback={null}>
+                <Tooltip title="Add label">
+                  <IconButton aria-label="add-label" size="small" onClick={() => handleLabelModalOpen(task)}>
+                    <AddIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              </Suspense>
               {task.labels.map((label) => (
                 <Box
                   key={label.id}
@@ -154,12 +160,14 @@ const Task = ({ tasks, day, task, index, handleUpdateTasks }: IProps): ReactElem
           </Box>
         )}
       </Draggable>
-      <LabelDialog
-        open={isLabelModalOpen}
-        handleSubmit={editLabelModalItem ? handleEditLabel : handleAddLabel}
-        onClose={handleLabelModalClose}
-        editLabel={editLabelModalItem}
-      />
+      <Suspense fallback={null}>
+        <LabelDialog
+          open={isLabelModalOpen}
+          handleSubmit={editLabelModalItem ? handleEditLabel : handleAddLabel}
+          onClose={handleLabelModalClose}
+          editLabel={editLabelModalItem}
+        />
+      </Suspense>
     </>
   );
 };
