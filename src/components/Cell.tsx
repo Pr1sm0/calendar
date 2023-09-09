@@ -49,7 +49,7 @@ type IProps = {
   handleUpdateTasks: (updatedTasks: ITask[], date: string) => void;
 };
 
-const Cell = ({ day, tasks, handleUpdateTasks }: IProps): ReactElement => {
+const Cell = ({ day, tasks = [], handleUpdateTasks }: IProps): ReactElement => {
   const [hoverDay, setHoverDay] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [addInputValue, setAddInputValue] = useState('');

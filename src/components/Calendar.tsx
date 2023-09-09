@@ -188,7 +188,7 @@ const Calendar = (): ReactElement => {
       } else {
         return true;
       }
-    }) || [];
+    });
 
   const handleDownloadImage = async () => {
     const element = printRef.current;
