@@ -15,7 +15,7 @@ const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 const classes = {
   container: {
-    width: 'fit-content',
+    minWidth: 1500,
   },
   header: {
     width: '100%',
@@ -32,7 +32,6 @@ const classes = {
     fontWeight: 700,
   },
   calendar: {
-    minWidth: 1500,
     display: 'grid',
     gap: '0.5rem',
     gridTemplateColumns: 'repeat(7, 1fr)',
