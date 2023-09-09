@@ -112,7 +112,7 @@ const Cell = ({ day, tasks = [], handleUpdateTasks }: IProps): ReactElement => {
               </Box>
             ))}
           </Box>
-          <Box sx={{ overflow: 'auto', pt: 2 }}>
+          <Box sx={{ overflow: 'auto', mt: 2 }}>
             {!isCreating && (
               <Button sx={{ display: `${hoverDay ? 'flex' : 'none'}`, width: '100%' }} onClick={handleCreate}>
                 Add task
