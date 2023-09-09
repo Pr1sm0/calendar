@@ -40,6 +40,7 @@ const classes = {
     maxHeight: '100px',
     overflow: 'auto',
     fontSize: '14px',
+    fontStyle: 'italic',
   },
 };
 

@@ -19,6 +19,7 @@ const classes = {
     backgroundColor: 'white',
     wordWrap: 'break-word',
     borderRadius: 2,
+    fontSize: '14px',
   },
   labelsWrapper: {
     display: 'flex',
@@ -31,7 +32,7 @@ const classes = {
     color: 'white',
     p: 1,
     borderRadius: 1,
-    fontSize: '1.5vh',
+    fontSize: '14px',
   }),
 };
 
